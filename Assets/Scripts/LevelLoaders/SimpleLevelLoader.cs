@@ -2,12 +2,13 @@
 
 public class SimpleLevelLoader : BaseLevelLoader
 {
-    private static float X_MIN = -10f;
-    private static float X_MAX = 10f;
-    private static float Y_MIN = -10f;
-    private static float Y_MAX = 10f;
-    private static float TARGET_MIN = 1f;
-    private static float TARGET_MAX = 3f;
+    // If desired all of this can be moved to simple level data and loaded on a per level basis.
+    private static float X_MIN = -5f;
+    private static float X_MAX = 5f;
+    private static float Y_MIN = -3f;
+    private static float Y_MAX = 3f;
+    private static float TARGET_MIN = 0.5f;
+    private static float TARGET_MAX = 1.5f;
 
     public override void loadLevel(BaseLevelData data, GameController game)
     {
@@ -26,10 +27,10 @@ public class SimpleLevelLoader : BaseLevelLoader
             float targetY = Random.Range(Y_MIN, Y_MAX);
             float targetSize = Random.Range(TARGET_MIN, TARGET_MAX);
 
-            game.addTarget(new SimpleTarget(), targetX, targetY)
+            SimpleTarget target = SimpleTarget.create();
+
+            game.addTarget(target, targetX, targetY, targetSize);
         }
-            //For each difficulty, add 1 smiliey of random size to the game
-            //Set the time for the game.
         game.setTime(levelData.getTime());
     }
 }

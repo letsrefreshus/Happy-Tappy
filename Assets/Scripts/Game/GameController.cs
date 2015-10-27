@@ -23,12 +23,23 @@ public class GameController : MonoBehaviour
         _levelLoaders.Add(name, loader);
     }
 
-    void Start()
+    void Awake()
     {
-        if(_levelLoaders == null)
+        if (_levelLoaders == null)
         {
             GameController.initLevelLoaders();
         }
+    }
+
+    void Start()
+    {
+        if(GameSettings.instance == null)
+        {
+            Debug.Log("No game setting data");
+            return;
+        }
+
+        loadLevel(GameSettings.instance.getLevelToLoad(), GameSettings.instance.getLoaderToUse());
     }
 
     /// <summary>
@@ -49,10 +60,19 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        if(_targets == null)
+        {
+            _targets = new List<BaseTarget>();
+        }
+        else
+        {
+            _targets.Clear();
+        }
+
         _levelLoaders[levelLoaderType].loadLevel(level, this);
     }
 
-    public void addTarget(BaseTarget target, float targetX, float targetY)
+    public void addTarget(BaseTarget target, float targetX, float targetY, float targetScale)
     {
         if(_targets.Contains(target))
         {
@@ -61,6 +81,7 @@ public class GameController : MonoBehaviour
 
         _targets.Add(target);
         target.transform.parent = gameObject.transform;
+        target.transform.localScale = new Vector3(targetScale, targetScale);
         target.transform.localPosition = new Vector3(targetX, targetY);
 
         //Probably do something with setting the layer of the target in here, probably.
