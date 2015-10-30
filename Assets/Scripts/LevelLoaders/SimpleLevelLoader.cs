@@ -31,6 +31,6 @@ public class SimpleLevelLoader : BaseLevelLoader
 
             game.addTarget(target, targetX, targetY, targetSize);
         }
-        game.setTime(levelData.getTime());
+        game.setTime(levelData.getTime(), true);
     }
 }

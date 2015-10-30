@@ -6,6 +6,13 @@ using UnityEngine;
 
 abstract public class BaseTarget : MonoBehaviour
 {
-    //this is not fleshed out yet.
-    //Will need an on click callback of some sort
+    protected int _targetLayerOrder;
+    
+    abstract public void onClick(GameController game);
+
+    //Setters
+    public void setTargetLayerOrder(int value) { _targetLayerOrder = value; }
+
+    //Getters
+    public int getTargetLayerOrder() { return _targetLayerOrder; }
 }

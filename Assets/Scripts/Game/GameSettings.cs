@@ -8,12 +8,14 @@ using System;
 public class GameSettings : MonoBehaviour {
     public static GameSettings instance;
 
+    private string _playerName;
     private string _loaderToUse;
     private BaseLevelData _levelToLoad;
 
     private static void init(GameSettings theInstance)
     {
         instance = theInstance;
+        
     }
 
     void Awake()
@@ -21,6 +23,7 @@ public class GameSettings : MonoBehaviour {
         if (GameSettings.instance == null)
         {
             GameSettings.init(this);
+            _playerName = "Test Player Name";
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -29,13 +32,6 @@ public class GameSettings : MonoBehaviour {
         }
     }
 
-    public void loadTestLevel()
-    {
-        Debug.Log("Load Test Level Called!");
-
-        SimpleLevelData level = new SimpleLevelData(10, 30f);
-        loadLevel(level);
-    }
 
     public void loadLevel(BaseLevelData levelData, string loaderToUse = null)
     {
@@ -58,14 +54,13 @@ public class GameSettings : MonoBehaviour {
         _levelToLoad = levelData;
     }
 
-    //Getters
-    public string getLoaderToUse()
+    public void setPlayerName(string playerName)
     {
-        return _loaderToUse;
+        _playerName = playerName;
     }
 
-    public BaseLevelData getLevelToLoad()
-    {
-        return _levelToLoad;
-    }
+    //Getters
+    public string getLoaderToUse() { return _loaderToUse; }
+    public BaseLevelData getLevelToLoad() { return _levelToLoad; }
+    public string getPlayerName() { return _playerName; }
 }
