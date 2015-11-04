@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour
         target.setTargetLayerOrder(_targets.Count);
         target.transform.parent = gameObject.transform;
         target.transform.localScale = new Vector3(targetScale, targetScale);
-        target.transform.localPosition = new Vector3(targetX, targetY);
+        target.transform.localPosition = new Vector3(targetX, targetY, -(_targets.Count * 0.01f));  //The z hack fixes an issue with which target is touched detection.
     }
 
     public void RemoveTarget(BaseTarget target)
