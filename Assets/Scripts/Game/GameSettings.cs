@@ -32,6 +32,11 @@ public class GameSettings : MonoBehaviour {
         }
     }
 
+    void Start()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
+
 
     public void loadLevel(BaseLevelData levelData, string loaderToUse = null)
     {
