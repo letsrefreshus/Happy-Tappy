@@ -19,6 +19,7 @@ public class SimpleLevelLoader : BaseLevelLoader
         }
 
         SimpleLevelData levelData = data as SimpleLevelData;
+        SimpleTargetFactory factory = new SimpleTargetFactory();
 
         //Load the level into the game.
         for (int i = 0; i < levelData.getDifficulty(); i++)
@@ -27,7 +28,7 @@ public class SimpleLevelLoader : BaseLevelLoader
             float targetY = Random.Range(Y_MIN, Y_MAX);
             float targetSize = Random.Range(TARGET_MIN, TARGET_MAX);
 
-            SimpleTarget target = SimpleTarget.create();
+            BaseTarget target = factory.makeTarget();
 
             game.addTarget(target, targetX, targetY, targetSize);
         }

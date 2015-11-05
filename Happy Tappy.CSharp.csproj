@@ -80,11 +80,19 @@
     <Compile Include="Assets\Scripts\LevelData\SimpleLevelData.cs" />
     <Compile Include="Assets\Scripts\LevelLoaders\BaseLevelLoader.cs" />
     <Compile Include="Assets\Scripts\LevelLoaders\SimpleLevelLoader.cs" />
+    <Compile Include="Assets\Scripts\LevelLoaders\WeightedListLevelLoader.cs" />
     <Compile Include="Assets\Scripts\MainMenu\ButtonController.cs" />
     <Compile Include="Assets\Scripts\Players\BasePlayer.cs" />
     <Compile Include="Assets\Scripts\Players\SimplePlayer.cs" />
     <Compile Include="Assets\Scripts\Targets\BaseTarget.cs" />
+    <Compile Include="Assets\Scripts\Targets\Factories\BaseTargetFactory.cs" />
+    <Compile Include="Assets\Scripts\Targets\Factories\MovingTargetFactory.cs" />
+    <Compile Include="Assets\Scripts\Targets\Factories\SimpleTargetFactory.cs" />
+    <Compile Include="Assets\Scripts\Targets\MovingTarget.cs" />
     <Compile Include="Assets\Scripts\Targets\SimpleTarget.cs" />
+    <Compile Include="Assets\Scripts\Utility\FloatRange.cs" />
+    <Compile Include="Assets\Scripts\Utility\WeightedItem.cs" />
+    <Compile Include="Assets\Scripts\Utility\WeightedList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

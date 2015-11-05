@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
         _levelLoaders = new Dictionary<string, BaseLevelLoader>();
 
         registerLevelLoader(SimpleLevelData.LEVEL_DATA_TYPE, new SimpleLevelLoader());
+        registerLevelLoader(GameSettings.SIMPLE_WEIGHTED_LIST_LOADER, new WeightedListLevelLoader());
     }
 
     private static void registerLevelLoader(string name, BaseLevelLoader loader)
@@ -106,6 +107,12 @@ public class GameController : MonoBehaviour
     {
         _gameActive = false;
 
+        //Callback to all targets
+        foreach (BaseTarget target in _targets)
+        {
+            target.onGameEnd(this);
+        }
+
         //Update the game over canvas
 
         //Open the game over popup
@@ -171,6 +178,8 @@ public class GameController : MonoBehaviour
         target.transform.parent = gameObject.transform;
         target.transform.localScale = new Vector3(targetScale, targetScale);
         target.transform.localPosition = new Vector3(targetX, targetY, -(_targets.Count * 0.01f));  //The z hack fixes an issue with which target is touched detection.
+
+        target.onAddedToGame(this);
     }
 
     public void RemoveTarget(BaseTarget target)

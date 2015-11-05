@@ -8,6 +8,8 @@ using System;
 public class GameSettings : MonoBehaviour {
     public static GameSettings instance;
 
+    public static string SIMPLE_WEIGHTED_LIST_LOADER = "SIMPLE_WEIGHTED_LIST_LOADER";
+
     private string _playerName;
     private string _loaderToUse;
     private BaseLevelData _levelToLoad;

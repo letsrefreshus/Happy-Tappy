@@ -10,6 +10,9 @@ abstract public class BaseTarget : MonoBehaviour
     
     abstract public void onClick(GameController game);
 
+    virtual public void onAddedToGame(GameController game) { }
+    virtual public void onGameEnd(GameController game) { }
+
     //Setters
     public void setTargetLayerOrder(int value) { _targetLayerOrder = value; }
 
