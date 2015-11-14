@@ -4,27 +4,27 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MovingTarget : BaseTarget
+public class ScalingTarget : BaseTarget
 {
-    private Vector3 _initialPosition;
-    private float _direction;
-    private float _distance;
+    private Vector3 _initialScale;
+    private float _minScale;
+    private float _maxScale;
     private float _timePerCycle;
     private bool _active = false;
     private float _timeStarted = -1;
 
-    public void init(float direction, float distance, float timePerCycle)
+    public void init(float minScale, float maxScale, float timePerCycle)
     {
-        _direction = direction;
-        _distance = distance;
+        _minScale = minScale;
+        _maxScale = maxScale;
         _timePerCycle = timePerCycle;
     }
 
     void Update()
     {
-        if(_active == true)
+        if (_active == true)
         {
-            if(_timeStarted < 0)
+            if (_timeStarted < 0)
             {
                 _timeStarted = Time.time;
             }
@@ -32,9 +32,8 @@ public class MovingTarget : BaseTarget
             float timeOffset = (Time.time - _timeStarted) % _timePerCycle;
 
             //animate
-            float distance = (_distance / 2) * (float)Math.Sin(timeOffset * 2 * Math.PI / _timePerCycle);
-            Vector3 positionOffest = new Vector3(distance * (float)Math.Cos(_direction), distance * (float)Math.Sin(_direction), 0);
-            gameObject.transform.localPosition = _initialPosition + positionOffest;
+            float scaleMultiplier = _minScale + ((_maxScale - _minScale) * Math.Abs((float)Math.Sin(timeOffset * 2 * Math.PI / _timePerCycle)));
+            gameObject.transform.localScale = scaleMultiplier * _initialScale;
         }
     }
 
@@ -42,7 +41,7 @@ public class MovingTarget : BaseTarget
     public override void onAddedToGame(GameController game)
     {
         _active = true;
-        _initialPosition = gameObject.transform.localPosition;
+        _initialScale = gameObject.transform.localScale;
     }
 
     public override void onGameEnd(GameController game)
@@ -55,10 +54,10 @@ public class MovingTarget : BaseTarget
     {
         foreach (BaseTarget target in game.getTargets())
         {
-            if(target.getTargetLayerOrder() > getTargetLayerOrder())
+            if (target.getTargetLayerOrder() > getTargetLayerOrder())
             {
                 Collider2D targetCollider = target.gameObject.GetComponent<Collider2D>();
-                if(Physics2D.IsTouching(targetCollider, gameObject.GetComponent<Collider2D>()))
+                if (Physics2D.IsTouching(targetCollider, gameObject.GetComponent<Collider2D>()))
                 {
                     Debug.Log("Invalid!");
                     game.timeBonus(-1f);

@@ -32,16 +32,42 @@ public class ButtonController : MonoBehaviour {
         GameSettings.instance.loadLevel(level);
     }
 
-
     public void loadMovingAndStillTestLevel()
     {
-        Debug.Log("Load Moving Test Level Called!");
+        Debug.Log("Load Moving And Still Test Level Called!");
 
         WeightedListLevelData level = new WeightedListLevelData(10, 15f);
         BaseTargetFactory movingTargetFactory = new MovingTargetFactory(0, (float)Math.PI * 2, 0.5f, 1.25f, 0.5f, 5.0f);
         BaseTargetFactory stillTargetFactory = new SimpleTargetFactory();
         level.addFactory(movingTargetFactory);
         level.addFactory(stillTargetFactory);
+
+        GameSettings.instance.loadLevel(level);
+
+    }
+
+    public void loadScalingTestLevel()
+    {
+        Debug.Log("Load Scaling Test Level Called!");
+
+        WeightedListLevelData level = new WeightedListLevelData(10, 15f);
+        BaseTargetFactory scalingTargetFactory = new ScalingTargetFactory(0.25f, 0.5f, 1.25f, 1.5f, 1.0f, 5.0f);
+        level.addFactory(scalingTargetFactory);
+
+        GameSettings.instance.loadLevel(level);
+    }
+    
+    public void loadMixedTestLevel()
+    {
+        Debug.Log("Load Mixed Test Level Called!");
+
+        WeightedListLevelData level = new WeightedListLevelData(10, 15f);
+        BaseTargetFactory movingTargetFactory = new MovingTargetFactory(0, (float)Math.PI * 2, 0.5f, 1.25f, 0.5f, 5.0f);
+        BaseTargetFactory scalingTargetFactory = new ScalingTargetFactory(0.25f, 0.5f, 1.25f, 1.5f, 1.0f, 5.0f);
+        BaseTargetFactory stillTargetFactory = new SimpleTargetFactory();
+        level.addFactory(movingTargetFactory);
+        level.addFactory(stillTargetFactory);
+        level.addFactory(scalingTargetFactory);
 
         GameSettings.instance.loadLevel(level);
 
