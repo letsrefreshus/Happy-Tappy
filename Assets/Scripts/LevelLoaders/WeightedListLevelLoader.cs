@@ -18,17 +18,15 @@ public class WeightedListLevelLoader : BaseLevelLoader
     //TODO: actually finish this up.
     public override void loadLevel(BaseLevelData data, GameController game)
     {
-        if (data.getLevelDataType() != SimpleLevelData.LEVEL_DATA_TYPE)
+        if (data.getLevelDataType() != WeightedListLevelData.LEVEL_DATA_TYPE)
         {
             Debug.Log("Error: Invalid level data for this loader.");
             return;
         }
 
-        SimpleLevelData levelData = data as SimpleLevelData;
+        WeightedListLevelData levelData = data as WeightedListLevelData;
 
-        WeightedList<BaseTargetFactory> _factoryList = new WeightedList<BaseTargetFactory>();
-        MovingTargetFactory movingTargetFactory = new MovingTargetFactory(0, (float)Math.PI * 2, 0.5f, 1.25f, 0.5f, 5.0f);
-        _factoryList.addItem(movingTargetFactory, 1);
+        WeightedList<BaseTargetFactory> _factoryList = levelData.getFactoryList();
 
         //Load the level into the game.
         for (int i = 0; i < levelData.getDifficulty(); i++)

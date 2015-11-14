@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
         _levelLoaders = new Dictionary<string, BaseLevelLoader>();
 
         registerLevelLoader(SimpleLevelData.LEVEL_DATA_TYPE, new SimpleLevelLoader());
-        registerLevelLoader(GameSettings.SIMPLE_WEIGHTED_LIST_LOADER, new WeightedListLevelLoader());
+        registerLevelLoader(WeightedListLevelData.LEVEL_DATA_TYPE, new WeightedListLevelLoader());
     }
 
     private static void registerLevelLoader(string name, BaseLevelLoader loader)

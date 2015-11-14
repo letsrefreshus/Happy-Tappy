@@ -17,10 +17,8 @@ public class SimpleLevelData : BaseLevelData
         _time = time;
     }
 
-    //Getters
-    public int getDifficulty() { return _difficulty; }
-    public float getTime() { return _time; }
-
     //Overrides
     public override string getLevelDataType() { return LEVEL_DATA_TYPE; }
+    public override int getDifficulty() { return _difficulty; }
+    public override float getTime() { return _time; }
 }
